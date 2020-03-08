@@ -2,7 +2,7 @@
   "name": "rsa",
   "version": "1.0.0",
   "description": "rsa scii packet",
-  "main": "index.js",
+  "main": "rsa-crypto.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,5 +14,11 @@
   "dependencies": {
     "bigint-conversion": "^2.1.1",
     "bigint-crypto-utils": "^2.4.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.8.7"
   }
 }
