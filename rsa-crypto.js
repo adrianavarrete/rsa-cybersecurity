@@ -1,14 +1,15 @@
 'use strict'
 
 const big = require('bigint-crypto-utils');
+const bigconv = require('bigint-conversion');
 
 const _ONE = BigInt(1);
 
 const generateRandomKeys = async function (bitLength) {
 
-    let p, q, n, phi, e;
+    let p, q, n, phi;
 
-    e = BigInt(65537);
+    const e = BigInt(65537);
 
     do {
         console.log("checkpoint")
@@ -22,7 +23,7 @@ const generateRandomKeys = async function (bitLength) {
 
     } while ((q === p || big.bitLength(n) != bitLength || big.gcd(phi, e) != 1))
 
-    d = big.modInv(e, n);
+    const d = big.modInv(e, n);
 
     const publicKey = new RSAPublicKey(e, n)
     const privateKey = new RSAPrivateKey(d, publicKey)
@@ -37,13 +38,13 @@ const RSAPublicKey = class PublicKey {
         this.n = n;
     }
 
-    get n() {
-        return this.n;
-    }
+    // get n() {
+    //     return this.n;
+    // }
 
-    get e() {
-        return this.e
-    }
+    // get e() {
+    //     return this.e
+    // }
 
     encrypt(m) {
         //c = m^e mod n
