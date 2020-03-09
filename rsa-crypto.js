@@ -1,7 +1,6 @@
 'use strict'
 
 const big = require('bigint-crypto-utils');
-const bigconv = require('bigint-conversion');
 
 const _ONE = BigInt(1);
 
@@ -12,10 +11,8 @@ const generateRandomKeys = async function (bitLength) {
     const e = BigInt(65537);
 
     do {
-        console.log("checkpoint")
         p = await big.prime(Math.floor(bitLength / 2) + 1);
         q = await big.prime(Math.floor(bitLength / 2));
-        console.log("He calculado los primos")
 
         n = p * q;
 
@@ -23,7 +20,7 @@ const generateRandomKeys = async function (bitLength) {
 
     } while ((q === p || big.bitLength(n) != bitLength || big.gcd(phi, e) != 1))
 
-    const d = big.modInv(e, n);
+    const d = big.modInv(e, phi);
 
     const publicKey = new RSAPublicKey(e, n)
     const privateKey = new RSAPrivateKey(d, publicKey)
@@ -38,19 +35,10 @@ const RSAPublicKey = class PublicKey {
         this.n = n;
     }
 
-    // get n() {
-    //     return this.n;
-    // }
-
-    // get e() {
-    //     return this.e
-    // }
-
-    encrypt(m) {
+    encrypt(mBig) {
         //c = m^e mod n
-        let mBig, c;
+        let c;
 
-        mBig = bigconv.textToBigint(m)
         c = big.modPow(mBig, this.e, this.n);
         return c;
     }
@@ -58,6 +46,11 @@ const RSAPublicKey = class PublicKey {
     verify(s) {
 
         //m = s^e mod n
+        let mBig;
+
+        mBig = big.modPow(s, this.e, this.n);
+
+        return mBig
 
     }
 
@@ -72,17 +65,21 @@ const RSAPrivateKey = class PrivateKey {
 
     decrypt(cBig) {
         //c^d mod n
-        let mBig, m;
+        let mBig;
 
-        mBig = big.modPow(cBig, this.publicKey.e, this.publicKey.n)
-        m = bigconv.bigintToText(mBig);
+        mBig = big.modPow(cBig, this.d, this.publicKey.n);
 
-        return m
+        return mBig
     }
 
     sign(m) {
         //m^d mod n
 
+        let sBig;
+
+        sBig = big.modPow(m, this.d, this.publicKey.n);
+
+        return sBig;
 
     }
 };
