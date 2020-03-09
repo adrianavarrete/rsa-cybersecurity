@@ -4,6 +4,7 @@ const bigconv = require('bigint-conversion');
 
 const { publicKey, privateKey } = rsa.generateRandomKeys(3072);
 
+console.log(publicKey);
 
 text = "hola";
 

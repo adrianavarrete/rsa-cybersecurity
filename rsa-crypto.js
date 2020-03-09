@@ -6,18 +6,21 @@ const _ONE = BigInt(1);
 
 const generateRandomKeys = async function (bitLength) {
 
-    let p, q, n, phi, e
+    let p, q, n, phi, e;
 
-    e = BigInt(65537)
+    e = BigInt(65537);
 
     do {
+        console.log("checkpoint")
         p = await big.prime(Math.floor(bitLength / 2) + 1);
         q = await big.prime(Math.floor(bitLength / 2));
+        console.log("He calculado los primos")
+
         n = p * q;
 
         phi = (p - _ONE) * (q - _ONE);
 
-    } while (q === p || big.bitLength(n) != bitLength || big.gcd(phi, e) !== 1);
+    } while ((q === p || big.bitLength(n) != bitLength || big.gcd(phi, e) != 1))
 
     d = big.modInv(e, n);
 
@@ -52,9 +55,9 @@ const RSAPublicKey = class PublicKey {
     }
 
     verify(s) {
-                
+
         //m = s^e mod n
-       
+
     }
 
 };
@@ -79,7 +82,7 @@ const RSAPrivateKey = class PrivateKey {
     sign(m) {
         //m^d mod n
 
-        
+
     }
 };
 
