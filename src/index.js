@@ -1,10 +1,11 @@
 'use strict'
 
-const big = require('bigint-crypto-utils');
+//const big = require('bigint-crypto-utils');
+import * as big from 'bigint-crypto-utils';
 
 const _ONE = BigInt(1);
 
-const generateRandomKeys = async function (bitLength) {
+export const generateRandomKeys = async function (bitLength) {
 
     let p, q, n, phi;
 
@@ -84,8 +85,3 @@ const RSAPrivateKey = class PrivateKey {
     }
 };
 
-module.exports = {
-    generateRandomKeys: generateRandomKeys,
-    PrivateKey: RSAPrivateKey,
-    PublicKey: RSAPublicKey
-};
