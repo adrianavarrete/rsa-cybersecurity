@@ -29,6 +29,21 @@ export const generateRandomKeys = async function (bitLength) {
     return { publicKey: publicKey, privateKey: privateKey };
 };
 
+export const encrypt = function (message, e, n) {
+    let c;
+
+    c = big.modPow(message, e, n);
+    return c;
+}
+
+export const decrypt = function (c, d, n) {
+    let mBig;
+
+    mBig = big.modPow(c, d, n);
+
+    return mBig
+}
+
 const RSAPublicKey = class PublicKey {
 
     constructor(e, n) {

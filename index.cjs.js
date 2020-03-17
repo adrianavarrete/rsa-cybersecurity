@@ -6,13 +6,6 @@ var big = require('bigint-crypto-utils');
 
 const _ONE = BigInt(1);
 
-
-/**
- * 
- * @param {int} bitLength
- * 
- * @returns {RSAPublicKey, RSAPrivateKey} 
- */
 const generateRandomKeys = async function (bitLength) {
 
     let p, q, n, phi;
@@ -35,6 +28,21 @@ const generateRandomKeys = async function (bitLength) {
     const privateKey = new RSAPrivateKey(d, publicKey);
 
     return { publicKey: publicKey, privateKey: privateKey };
+};
+
+const encrypt = function (message, e, n) {
+    let c;
+
+    c = big.modPow(message, e, n);
+    return c;
+};
+
+const decrypt = function (c, d, n) {
+    let mBig;
+
+    mBig = big.modPow(c, d, n);
+
+    return mBig
 };
 
 const RSAPublicKey = class PublicKey {
@@ -93,4 +101,6 @@ const RSAPrivateKey = class PrivateKey {
     }
 };
 
+exports.decrypt = decrypt;
+exports.encrypt = encrypt;
 exports.generateRandomKeys = generateRandomKeys;

@@ -26,6 +26,21 @@ const generateRandomKeys = async function (bitLength$1) {
     return { publicKey: publicKey, privateKey: privateKey };
 };
 
+const encrypt = function (message, e, n) {
+    let c;
+
+    c = modPow(message, e, n);
+    return c;
+};
+
+const decrypt = function (c, d, n) {
+    let mBig;
+
+    mBig = modPow(c, d, n);
+
+    return mBig
+};
+
 const RSAPublicKey = class PublicKey {
 
     constructor(e, n) {
@@ -82,4 +97,4 @@ const RSAPrivateKey = class PrivateKey {
     }
 };
 
-export { generateRandomKeys };
+export { decrypt, encrypt, generateRandomKeys };
