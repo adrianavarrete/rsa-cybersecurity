@@ -24,8 +24,8 @@ const generateRandomKeys = async function (bitLength) {
 
     const d = big.modInv(e, phi);
 
-    const publicKey = new RSAPublicKey(e, n);
-    const privateKey = new RSAPrivateKey(d, publicKey);
+    const publicKey = new PublicKey(e, n);
+    const privateKey = new PrivateKey(d, publicKey);
 
     return { publicKey: publicKey, privateKey: privateKey };
 };
@@ -45,7 +45,7 @@ const decrypt = function (c, d, n) {
     return mBig
 };
 
-const RSAPublicKey = class PublicKey {
+class PublicKey {
 
     constructor(e, n) {
         this.e = e;
@@ -71,9 +71,8 @@ const RSAPublicKey = class PublicKey {
 
     }
 
-};
-
-const RSAPrivateKey = class PrivateKey {
+}
+class PrivateKey {
 
     constructor(d, publicKey) {
         this.d = d;
@@ -99,8 +98,10 @@ const RSAPrivateKey = class PrivateKey {
         return sBig;
 
     }
-};
+}
 
+exports.PrivateKey = PrivateKey;
+exports.PublicKey = PublicKey;
 exports.decrypt = decrypt;
 exports.encrypt = encrypt;
 exports.generateRandomKeys = generateRandomKeys;
