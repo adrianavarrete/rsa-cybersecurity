@@ -1,5 +1,5 @@
 {
-  "name": "rsa",
+  "name": "rsa-scii-upc",
   "version": "1.0.0",
   "description": "rsa scii packet",
   "main": "index.cjs.js",
@@ -16,16 +16,16 @@
   "author": "Adria",
   "license": "ISC",
   "dependencies": {
-    "bigint-conversion": "^2.1.1",
-    "bigint-crypto-utils": "^2.4.7"
+    "bigint-conversion": "^2.1.10",
+    "bigint-crypto-utils": "3.0.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.7",
+    "@babel/core": "^7.9.6",
     "@babel/node": "^7.8.7",
-    "@babel/preset-env": "^7.8.7",
-    "@rollup/plugin-typescript": "^4.0.0",
-    "rollup": "^2.0.6",
+    "@babel/preset-env": "^7.9.6",
+    "@rollup/plugin-typescript": "^4.1.1",
+    "rollup": "^2.9.1",
     "typescript": "^3.8.3"
   }
 }
